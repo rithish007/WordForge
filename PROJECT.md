@@ -1,0 +1,210 @@
+# WorldForge project state
+
+Updated: 2026-09-15. Phase: **Local simulator implemented and tested; submission page live; recording pending.**
+
+## Local build completed this session
+
+- Local app: http://127.0.0.1:3000. Start/restart with `scripts/start-demo.ps1`.
+  Frontend and backend were restarted successfully through this launcher.
+- Next.js/React Three Fiber workspace, three asymmetric fixtures, RB-THERON and
+  Boxer, selectable mission points, occupancy overlay, object editing and undo,
+  validated/canonical JSON import/export and browser save/load are implemented.
+- A* rejects corner cutting; shortcut/smoothing segments are revalidated.
+  An isolated MuJoCo process executes planar velocity-servo physics, with
+  500/50/20 Hz physics/control/telemetry and 1x playback of recorded frames.
+- Results include distance, simulation time, forbidden contacts, conservative
+  clearance, final goal error/speed, mission/robot snapshots and deterministic
+  hash. Full local records and MJCF are in gitignored `artifacts/runs/`.
+- Cross-dock RB-THERON default mission: SUCCESS, 28.32 s, 21.9500 m,
+  zero forbidden contacts, 0.15418 m minimum conservative clearance,
+  0.24335 m goal error and 0.03118 m/s stopped speed.
+- `server: ../.venv/Scripts/python.exe -m pytest -q`: **12 passed**.
+  Includes both robots in two worlds, reverse starting yaw, determinism, blocked
+  route, invalid schema/geometry, worker timeout, contact classification and
+  real Three.js vertex-to-MuJoCo geometry parity (rotations and derived walls).
+- `web: npm run build`: **passed**, including TypeScript and production output.
+- Actual browser checks: rendered warehouse/orientation, robot switch, clearance
+  overlay, successful run and metrics, blocked-route explanation, edit rejection,
+  undo, JSON import, save/reload/load and floor-based goal picking all passed.
+- Dependencies are local and pinned in `web/package-lock.json` and
+  `server/requirements.txt`; Python .venv uses bundled Python 3.12.14.
+- No paid model calls, public simulator backend, video recording or Product Hunt
+  submission was completed. The simulator source is checkpointed locally on
+  `codex/local-demo`; this branch has not been pushed to GitHub.
+  Next concrete step: rehearse and record `docs/LOCAL_DEMO.md`, then attach the
+  real video to the Vercel submission page and verify challenge submission fields.
+
+### Local implementation conventions
+
+Bounds are clear interior dimensions; 0.10 m walls extend outward. One-metre
+walls are visible and compiled into physics. The grid is floor-indexed and
+conservative, including partial edge cells; overlaps up to 0.01 m count as touching.
+No arbitrary free-area rejection threshold is added. Schema/structural failures
+are rejected atomically; unreachable but structurally valid edits remain visible
+with warnings, and the mission returns PLAN_FAILED. This implements the local
+blocked-edit recording requirement. Stopping commands zero velocity inside the
+0.25 m goal tolerance and waits for measured speed below 0.05 m/s.
+
+Both robots use manufacturer dimensions and an explicitly estimated 1 rad/s
+angular limit; no-selection validation uses Boxer's larger full-turn envelope.
+Runs are capped at 120 simulated seconds and 25 wall-clock seconds with one
+worker at a time. Seeds are persisted; the current physics/controller has no
+stochastic inputs. Browser save/load retains geometry; exported runs also retain
+mission and robot. This local demo uses HTTP batch telemetry and full replay,
+so public WebSocket reconnection/session machinery remains deferred.
+
+## Live submission page
+
+- Public URL: https://worldforge-nine.vercel.app/
+- Vercel project: https://vercel.com/rithishrs007projects/worldforge
+- Source: `site/`, commit `83c8146`, pushed to GitHub `main`.
+- Deployed through Vercel Drop to the user's existing Hobby account after sign-in.
+  Git auto-deployment is not connected: Vercel's current GitHub installation cannot
+  access WordForge. Do not assume a push updates the live page.
+- Browser checked; anonymous HTTP 200 for HTML, CSS, JavaScript and SVG assets.
+- Page clearly says the local prototype and demo video are in development. It
+  contains an original concept illustration, not a claimed simulator screenshot.
+- Add the real recording through `site/demo-config.js` and redeploy to the same
+  project. See `docs/HOSTING.md`. No app API key is needed for this static page.
+- Submission-page hosting is complete. The local robot demo is implemented;
+  recording and Product Hunt submission remain. No contest submission was made.
+
+## Current direction (overrides the earlier production-first handoff)
+
+The user wants a video rather than a live hosted app for now and reports 64 hours
+42 minutes to submission close. `docs/VIDEO_DEMO.md` is the current scope;
+`docs/ROBOT_SOURCES.md` lists candidates. Preserve `Plan.md` as the hosted-product
+target. The user can use GitHub-connected Vercel if a video page is required.
+
+The earlier setup-only handoff is superseded by the local implementation above.
+Do not self-queue a kickoff as a substitute for implementing the next step.
+
+Current gates: local fixture in browser -> one robot plans/runs with real results
+-> repeatable edited/blocked scenario -> recording and submission package.
+Simulator deployment, concurrency and live API chat are deferred. Use explicit
+fixture/import mode and genuine Astra-authored JSON from Codex. Do not present
+that as in-app live AI. The user has now confirmed a web link is required; the
+Vercel page above provides one. Other challenge eligibility remains unverified.
+
+## Contract and configuration
+
+- Product contract: `Plan.md` (original user file, preserved).
+- Product name: WorldForge. Existing checkout/repository name: WordForge.
+- Coding model: `gpt-6-astra`, reasoning `high`.
+- Project default: `.codex/config.toml`; explicit launcher: `scripts/start-astra.ps1`.
+- Implementation kickoff: `docs/ASTRA_BUILD.md`.
+- Repo root corresponds to the `astra/` root in Plan section 16. Do not nest it.
+- Next.js/R3F frontend; FastAPI/Pydantic backend; CPU MuJoCo workers; Vercel plus
+  a Docker VM with a persistent filesystem, exactly as specified in the plan.
+
+## Current evidence
+
+At setup, the repository contained only the initial README and untracked
+`Plan.md`. No application, tests, environment file, deployment configuration,
+or public product URL existed. No production gate has passed.
+
+Local preflight on 2026-09-14:
+
+| Item | Result |
+| --- | --- |
+| Git | Available; branch `main`, initial commit `5c9d6a7` |
+| Node / npm | 24.12.0 / 11.6.2 |
+| Codex CLI | Available; `--model`, `--cd`, and `--config` verified with local help |
+| System Python | `python` absent on PATH; `py` reports no installed Pythons |
+| Bundled Python | 3.12.14 available; path below |
+| Docker / Vercel CLIs | Not found on PATH; installation/account state not otherwise verified |
+| OpenAI / Vercel environment credentials | `OPENAI_API_KEY` and `VERCEL_TOKEN` not set in this process; other credential stores not inspected |
+
+Bundled Python on this machine:
+`C:\Users\rithi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`.
+Use it to create a project-local environment if compatible; do not modify the
+shared runtime or assume this machine-specific path exists on a deployment host.
+
+## Challenge verification
+
+The user confirmed the [GPT-6 Astra Challenge page](https://www.producthunt.com/contests/gpt-6-astra-challenge).
+It identifies OpenAI as organizer and 18 September 2026 as the event date.
+The [Product Hunt announcement](https://www.producthunt.com/p/producthunt/product-hunt-teams-up-with-openaidevs-for-the-gpt-6-astra-challenge)
+directs entrants to build with Astra and schedule a launch for that Friday.
+
+The public submission link redirects to login. No submission has been created
+or scheduled. The challenge launch-guide redirect could not be retrieved by the
+research tool; detailed eligibility, deliverables, cutoff time and time zone are
+not yet verified. The extracted countdown shows zero and is not reliable evidence
+that submissions are closed. Confirm timing in the authenticated launch flow.
+
+Use Astra for product world generation/result interpretation as well as coding,
+with evidence of actual model/tool calls once implemented. This is the project's
+implementation choice, not a claim that the public page requires both uses.
+
+## Original hosted-product gates (deferred)
+
+| Gate | State | Next action |
+| --- | --- | --- |
+| Foundation / local fixtures | Local pass | Public app/backend deferred; static submission page live |
+| Agent BUILD/EDIT | Not started | Follow foundation; live evals require configured model access and budget |
+| Robots / planning | Local pass | Both robots, collision-safe routes and blocked case tested |
+| MuJoCo RUN | Local pass | Record the tested local workflow |
+| Production hardening / launch | Not started | Follow RUN; seven production acceptance items and submission evidence |
+
+## Inputs for the later hosted product
+
+1. Existing Vercel target and backend VM/provider, access, and persistent volume.
+   None supplied yet. Prepare deployment artifacts while local work proceeds.
+2. A server-side OpenAI API key, Astra API access, and an explicit daily API budget.
+   Keep template mode available until configured; never infer unlimited spend.
+3. Manufacturer datasheets for RB-THERON and Boxer. Source these during the build;
+   ask only about physical parameters that cannot be verified and need estimation.
+4. Confirm the contest cutoff/time zone and reconcile with Plan's Friday 14:00
+   freeze / 16:00 launch schedule. The plan does not specify a time zone.
+
+## Decision log
+
+- 2026-09-14: Preserve `Plan.md` casing/content and existing checkout name. Use
+  WorldForge for user-facing product text, as the plan specifies.
+- 2026-09-14: Project-only Astra model defaults; do not change global model or
+  permission settings. Launcher passes model/effort explicitly to avoid ambiguity.
+- 2026-09-14: Bring robot dimension sourcing forward to foundation because V3
+  already depends on the widest supported robot. This changes task order only.
+- 2026-09-14: Treat production evidence separately from local checks. Missing
+  hosting cannot be recorded as a successful deployment.
+
+## Implementation questions identified by Astra
+
+A GPT-6 Astra / high subagent reviewed the original plan read-only during setup.
+The following are review findings and proposals, not silent amendments to the
+plan. Resolve material product/physical choices before their affected code; keep
+independent scaffolding work moving.
+
+| Affected layer | Finding and proposed treatment |
+| --- | --- |
+| V3, Plan sections 6 and 17 | Source footprints during Day 1. Use the greatest `collision_radius + safety_margin`, not greatest physical width, as the default planning envelope. |
+| Mutation policy, sections 6 and 12 | The rule that V3 failures make a world invalid conflicts with the intended unreachable-edit demo. Proposed policy: reject invalid schema/geometry atomically, retain structurally valid but unreachable edits with diagnostics, and explain blocked runs as PLAN_FAILED. Confirm this distinction before implementing it. |
+| Shared geometry, sections 2 and 7 | Define wall thickness/interior boundary semantics, grid indexing and edge cells, conservative rasterization and overlap tolerance once. No numerical free-area rejection threshold is specified. Record a concrete proposal before relying on new physical conventions. |
+| Planner, sections 9 and 15 | Forbid diagonal corner cutting and validate continuous segments after shortening/smoothing. Aisle evals must accommodate the circular inflation envelope, not just robot width. |
+| Physics, section 7 | Include derived walls in MJCF; use half-extents and explicit angle units. MuJoCo group labels do not set collision masks. Classify forbidden wall/obstacle contacts explicitly. |
+| Controller, section 10 | The commanded 0.15 m/s goal speed cannot satisfy SUCCESS below 0.05 m/s. Add a stopping phase and check measured speed; handle arbitrary starting yaw and zero lookahead. |
+| Edit targeting, sections 5 and 12 | The schema has no aisle entity for 'aisle B'. Define stable deterministic addressing for aisle width/density tools. Expose undo explicitly and define stale-revision conflict behaviour. |
+| Reconnect, section 11 | A last-100-frame replay covers five simulated seconds. Preserve sequence-addressable telemetry so a disconnected client can recover 1x playback after a fast run has finished. |
+| Reproducibility, sections 5 and 15 | Persist robot/mission snapshots and engine/controller versions; exclude wall time from deterministic hashes. |
+
+The review was initially read-only. Its setup findings above are historical;
+the local conventions and current test evidence at the top supersede them for
+the current recorded-demo scope.
+
+## Setup verification
+
+- Launcher `-Check`: passes and resolves this checkout, GPT-6 Astra / high, the
+  kickoff document and the installed Codex executable without starting a build.
+- PowerShell parser: no launcher syntax errors.
+- Python `tomllib`: project configuration parses and contains exactly the two
+  intended model settings.
+- `git diff --check`: passes. All setup changes are local and uncommitted.
+- Original `Plan.md` SHA-256 remains
+  `4A7ED9293823FD1553F023F8DFA650F192E2DD755C2D2603C6B5C3961A98CE74`.
+
+## Session handoff
+
+Next action: use `./scripts/start-demo.ps1` and rehearse `docs/LOCAL_DEMO.md`.
+The Astra launcher remains available for further coding; it is separate from
+the application launcher and does not schedule background work.

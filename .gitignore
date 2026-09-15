@@ -1,0 +1,36 @@
+# Credentials and machine-specific environment
+.env
+.env.*
+!.env.example
+!.env.*.example
+.venv/
+venv/
+
+# JavaScript and Python build output
+node_modules/
+.next/
+out/
+dist/
+build/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage/
+
+# Runtime project state and local hosting metadata
+/data/
+.vercel/
+*.log
+playwright-report/
+test-results/
+artifacts/runs/
+*.tsbuildinfo
+
+# OS/editor-local files
+.DS_Store
+Thumbs.db
