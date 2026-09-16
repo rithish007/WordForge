@@ -1,6 +1,45 @@
 # WorldForge project state
 
-Updated: 2026-09-15. Phase: **Local simulator implemented and tested; submission page live; recording pending.**
+Updated: 2026-09-16. Phase: **Prompt-first entry and detailed warehouse visuals added; live AI integration and recording pending.**
+
+## Latest continuation checkpoint: system theme
+
+- Both the submission page and simulator follow the system light/dark preference.
+  CSS uses `prefers-color-scheme`; the 3D scene observes preference changes and
+  updates its background, floor, grid, walls and lighting without a reload.
+- Local browser previews checked both themes on the entry, lab and static page.
+  Production frontend build passed; targeted geometry checks passed (2 tests).
+- The theme changes are local. The public Vercel page still needs a redeploy.
+  Vercel CLI 59.18.0 is cached, but CLI login/link/deploy has not been completed.
+- Next action: deploy only `site/` to the existing `worldforge` Vercel project,
+  then verify its public theme assets. Live chat generation remains a separate
+  unfinished milestone requiring implementation, server credentials and a budget.
+
+## Product direction clarified on 16 September
+
+- User confirmed the intended flow: a chatbox asks for the environment/simulation,
+  builds the world, then leads to robot mission planning and testing. The previous
+  simulator-first page was the deterministic foundation, not the completed product.
+- `/` now contains the prompt-first entry. `/lab` contains the tested simulator;
+  sample cards select a fixture explicitly through the scenario query parameter.
+  The Build with Astra control is disabled and explains that live AI is disconnected.
+  Prompt text can be copied for Codex; sample selection never pretends to generate
+  a world from that text. The live agent layer still requires implementation and
+  API validation, not merely adding a key.
+- User wants recognizable 3D assets. Original procedural rack uprights, shelves,
+  cartons, wooden pallets, packing tables, barriers, charger and robot body/wheel/
+  sensor details now replace solid visual cuboids. Conservative collision boxes
+  still own planning/physics and selection. These are original geometric models,
+  not imported vendor CAD. Humans and pedestrian behaviour are not implemented.
+- This visual direction supersedes the original plan's plain-block presentation;
+  warehouses and the two robots remain the implemented simulation scope.
+- The user is unfamiliar with API keys/budgets. Explained them in plain language.
+  No API budget, paid call or key setup has been authorized; retain local demo mode.
+- Claude Code handoff was discussed only as an option. **Ask the user before any
+  handoff or Claude launch.** Do not create automatic credit-triggered switching.
+- Production frontend build passed for `/` and `/lab`; browser checked the entry,
+  explicit sample navigation and detailed models. Fixed repeated Three.js shadow
+  warnings by selecting the supported PCF shadow mode.
 
 ## Local build completed this session
 

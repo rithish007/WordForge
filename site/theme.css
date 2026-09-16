@@ -1,0 +1,12 @@
+:root{color-scheme:light dark}
+@media(prefers-color-scheme:dark){
+ :root{--paper:#111c17;--ink:#e2eadd;--muted:#adbbad;--line:#3a4b3c;--orange:#eea477;--lime:#d8ed9d}
+ .button{background:#b8ceac;color:#18251a}
+ .button:hover{background:#d5e4c9}
+ .skip{background:#d7e6ca;color:#122016}
+ .demo-section{background:#17271c;color:#e2eadd;border-block:1px solid #344a35}
+ .demo-panel{background:#1b3021;border-color:#4b654a}
+ .demo-copy,.demo-placeholder p,.video-note{color:#bfcdbb}
+ .record-label,.record-footer{color:#c2d3b9}
+ .light-link:hover{color:#fff}
+}

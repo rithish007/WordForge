@@ -17,7 +17,9 @@ From this checkout in PowerShell, run `./scripts/start-demo.ps1`, then open
 http://127.0.0.1:3000. Dependencies are installed on this computer. For a fresh
 checkout, follow [LOCAL_DEMO.md](docs/LOCAL_DEMO.md).
 
-Choose **The cross-dock**, click **Plan route**, then **Run simulation**. Add the
+The home page starts with a prompt box; live AI generation is not connected yet.
+Choose the **The cross-dock** sample to open the lab, then click **Plan route**
+and **Run simulation**. Add the
 cross-aisle barrier to demonstrate an explained planning failure; undo restores
 the world. Importable scenario files and the JSON schema are in `examples/`.
 No application API key is needed for this explicit fixture/import mode.

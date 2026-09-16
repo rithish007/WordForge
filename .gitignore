@@ -29,6 +29,8 @@ coverage/
 playwright-report/
 test-results/
 artifacts/runs/
+artifacts/theme-preview/
+artifacts/deploy/
 *.tsbuildinfo
 
 # OS/editor-local files

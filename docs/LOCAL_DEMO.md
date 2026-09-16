@@ -13,7 +13,9 @@ From C:\dev\WordForge in PowerShell:
 ./scripts/start-demo.ps1
 ```
 
-Open http://127.0.0.1:3000. Keep the launcher terminal open. Ctrl+C stops only
+Open http://127.0.0.1:3000 for the prompt-first entry and choose a sample world,
+or go directly to http://127.0.0.1:3000/lab. Live AI generation remains disabled.
+Keep the launcher terminal open. Ctrl+C stops only
 processes that this invocation started. Use `-Build` after editing frontend code.
 Logs are in `artifacts/logs/`. Ports 3000 and 8000 bind only to loopback.
 
@@ -60,8 +62,9 @@ robot changes clear stale paths/results.
   pure-pursuit control, measured MuJoCo motion, results and replay.
 - The planar body has X/Y/Z-yaw velocity servos; no torque-driven wheel dynamics.
   Angular limit is an explicitly labelled 1 rad/s simulation estimate.
-- Collision bodies are primitives. No optional third-party robot meshes have
-  been bundled. The manufacturer dimensions and links are in the robot selector.
+- Collision bodies are primitives; original procedural shelves, pallets, tables
+  and robot details provide recognizable visuals. No third-party robot meshes
+  have been bundled. Manufacturer dimensions and links are in the robot selector.
 - Physics/control/telemetry rates are 500/50/20 Hz. A run has a 120 simulated
   second cap and 25 wall-clock second worker timeout, with one worker at a time.
 - Run artifacts are stored under `artifacts/runs/<run_id>/`; they are gitignored.
