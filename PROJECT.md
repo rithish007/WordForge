@@ -2,7 +2,35 @@
 
 Updated: 2026-09-16. Phase: **Prompt-first entry and detailed warehouse visuals added; live AI integration and recording pending.**
 
-## Latest continuation checkpoint: system theme
+## User review changes, 16 September
+
+- Added Light / Dark / Auto selectors across the public page, app home and lab;
+  preferences persist per origin. Dark surfaces and scene palette are now neutral
+  charcoal/slate. Auto still follows the system. Shared theme runtime copies match.
+- Applied the public cube logo and favicon to the app. Replaced the large prompt
+  card with a slim rounded input and internal Build world button (still disabled).
+- Sample objects have simple numbered labels without changing stable IDs. Names
+  are editable; the list offers flat or collapsible category views. Undo is an
+  accessible icon. File controls now explicitly describe WorldForge JSON layouts.
+- User corrected the corner report: only the body/ring crossed the shading.
+  Explained inflated planning exclusions and added planned/recorded trajectory
+  distinction. No physics/controller change retained. Expanded tests verify
+  physical clearance on corner routes; do not claim exact grid-constrained tracking.
+  See `docs/INTERFACE_REVIEW.md` for investigation limits, export explanations,
+  the full three-page copy audit and remaining scope.
+- Verification: backend `python -m pytest -q`: **14 passed** (2 existing warnings);
+  frontend `npm run build`: passed; theme JS syntax/SVG parsing/diff checks passed.
+  Browser checked light/dark/auto, persistence, grouping, rename + undo, prompt
+  layout, scene colours, actual replay and no captured lab console errors.
+  Default RB-THERON run remains SUCCESS, 28.32 s, 21.95 m and zero contacts.
+- Public revision deployed to the existing alias https://worldforge-nine.vercel.app/
+  via CLI; deployment `dpl_262PGCJkJhEjvpLYrWt6NS5wFYDh` is READY. Browser confirmed
+  the new selector and updated working-prototype/recording status.
+- Local simulator is running via `scripts/start-demo.ps1`. Next: user review and
+  discussion of live AI, demo recording and hosting scope. No paid model calls,
+  X posts, asset importer, Claude handoff or challenge submission were initiated.
+
+## Earlier continuation checkpoint: system theme
 
 - Both the submission page and simulator follow the system light/dark preference.
   CSS uses `prefers-color-scheme`; the 3D scene observes preference changes and
@@ -30,7 +58,7 @@ Updated: 2026-09-16. Phase: **Prompt-first entry and detailed warehouse visuals 
   simulator-first page was the deterministic foundation, not the completed product.
 - `/` now contains the prompt-first entry. `/lab` contains the tested simulator;
   sample cards select a fixture explicitly through the scenario query parameter.
-  The Build with Astra control is disabled and explains that live AI is disconnected.
+  The Build world control is disabled and explains that live AI is disconnected.
   Prompt text can be copied for Codex; sample selection never pretends to generate
   a world from that text. The live agent layer still requires implementation and
   API validation, not merely adding a key.

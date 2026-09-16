@@ -27,7 +27,7 @@ def test_real_missions(world_id,robot_id):
     assert result['metrics']['collision_count']==0
     assert result['metrics']['goal_error_m']<=.25
     assert result['metrics']['final_speed_m_s']<.05
-    assert result['metrics']['minimum_clearance_m']>0
+    assert result['metrics']['minimum_clearance_m']>=robot.safety_margin
     assert result['frames'][0]['pose']==[-8,-6,math.pi]
     assert np.allclose(np.diff([f['t'] for f in result['frames']][:-1]),.05)
 
@@ -36,6 +36,18 @@ def test_determinism():
     m=MissionRequest(world=w,start=(-8,-6),goal=(8,6))
     route=plan(g,m.start,m.goal)
     assert simulate(m,r,route)['deterministic_hash']==simulate(m,r,route)['deterministic_hash']
+
+@pytest.mark.parametrize('robot_id',list(ROBOTS))
+def test_crossdock_corner_clearance(robot_id):
+    world=WORLDS['crossdock'];robot=ROBOTS[robot_id];_,grid=report_world(world,robot)
+    mission=MissionRequest(world=world,robot_id=robot_id,start=(-8,-6),goal=(8,-6))
+    route=plan(grid,mission.start,mission.goal)
+    result=simulate(mission,robot,route)
+    assert result['status']=='SUCCESS'
+    assert result['metrics']['collision_count']==0
+    # Grid inflation is quantized. Physical clearance, not visual ring overlap,
+    # is the measured safety condition for this corner regression.
+    assert result['metrics']['minimum_clearance_m']>=robot.safety_margin
 
 def test_blocked_route_and_atomic_invalid():
     w=WORLDS['sealed_crossdock'];r=ROBOTS['boxer']

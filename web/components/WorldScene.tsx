@@ -8,7 +8,7 @@ import {WORLD_ROTATION,objectMesh,wallMeshes} from '@/lib/geometry';
 import {ObjectVisual,RobotVisual} from './SceneAssets';
 import {useSystemDark,sceneThemes} from '@/lib/theme';
 
-type Props={world:World;robot:Robot;start:Point;goal:Point;path:Point[];frame?:Frame;selected:string|null;onSelect:(id:string)=>void;onFloor:(point:Point)=>void;grid:Grid|null;showGrid:boolean;pickMode:string|null};
+type Props={world:World;robot:Robot;start:Point;goal:Point;path:Point[];trail:Point[];frame?:Frame;selected:string|null;onSelect:(id:string)=>void;onFloor:(point:Point)=>void;grid:Grid|null;showGrid:boolean;pickMode:string|null};
 function ClearanceGrid({grid}:{grid:Grid}){
  const ref=useRef<THREE.InstancedMesh>(null);
  useLayoutEffect(()=>{const matrix=new THREE.Matrix4();grid.occupied_runs.forEach(([y,a,b],i)=>{
@@ -36,7 +36,7 @@ export default function WorldScene(p:Props){
  <group ref={root} rotation={WORLD_ROTATION}>
  <mesh receiveShadow onClick={pick}><planeGeometry args={[p.world.bounds.width,p.world.bounds.length]}/><meshStandardMaterial color={theme.floor} roughness={.95}/></mesh>
  {floorLines.map((line,i)=><Line key={i} points={line.map(([x,y])=>[x,y,.012])} color={theme.grid} lineWidth={.6}/>)}
- <Line points={[[-p.world.bounds.width/2,-p.world.bounds.length/2,.02],[p.world.bounds.width/2,-p.world.bounds.length/2,.02],[p.world.bounds.width/2,p.world.bounds.length/2,.02],[-p.world.bounds.width/2,p.world.bounds.length/2,.02],[-p.world.bounds.width/2,-p.world.bounds.length/2,.02]]} color="#7f9990" lineWidth={2}/>
+ <Line points={[[-p.world.bounds.width/2,-p.world.bounds.length/2,.02],[p.world.bounds.width/2,-p.world.bounds.length/2,.02],[p.world.bounds.width/2,p.world.bounds.length/2,.02],[-p.world.bounds.width/2,p.world.bounds.length/2,.02],[-p.world.bounds.width/2,-p.world.bounds.length/2,.02]]} color={theme.boundary} lineWidth={2}/>
  {p.showGrid&&p.grid&&<ClearanceGrid grid={p.grid}/>}
  {wallMeshes(p.world).map(w=><mesh key={w.id} position={w.position}><boxGeometry args={w.size}/><meshStandardMaterial color={theme.walls} transparent opacity={.28}/><Edges color={theme.walls}/></mesh>)}
  {p.world.zones.map(z=><group key={z.id} position={[...z.center,.035]} rotation={[0,0,z.yaw_deg*Math.PI/180]}><mesh onClick={pick}><planeGeometry args={z.extent}/><meshBasicMaterial color={z.type==='receiving'?'#79af96':'#eaba8b'} transparent opacity={.35}/></mesh><Html center position={[0,0,.05]} style={{pointerEvents:'none'}}><span className="zone-label">{z.label}</span></Html></group>)}
@@ -45,6 +45,7 @@ export default function WorldScene(p:Props){
  <ObjectVisual object={o} selected={p.selected===o.id}/>
  </group>)}
  {p.path.length>1&&<Line points={p.path.map(([x,y])=>[x,y,.08])} color="#e56e36" lineWidth={4}/>}
+ {p.trail.length>1&&<Line points={p.trail.map(([x,y])=>[x,y,.09])} color="#549cdd" lineWidth={2.5} dashed dashSize={.18} gapSize={.10}/>}
  {[{point:p.start,label:'A',color:'#27664d'},{point:p.goal,label:'B',color:'#c55229'}].map(m=><group key={m.label} position={[...m.point,.06]}><mesh onClick={pick}><ringGeometry args={[.31,.38,48]}/><meshBasicMaterial color={m.color}/></mesh><Html center position={[0,0,.65]} style={{pointerEvents:'none'}}><span className="pin" style={{background:m.color}}>{m.label}</span></Html></group>)}
  <RobotBody robot={p.robot} pose={pose}/>
  <Line points={[[0,0,.03],[1,0,.03]]} color="#bd5640" lineWidth={2}/><Line points={[[0,0,.03],[0,1,.03]]} color="#39765e" lineWidth={2}/>

@@ -39,6 +39,12 @@ The local simulator and theme source are checkpointed on `codex/local-demo`.
 
 ## Add the actual video
 
+Latest UI revision (16 September): Light / Dark / Auto selector, neutral dark
+palette and current local-prototype status deployed as
+https://worldforge-otjwm5e1z-rithishrs007projects.vercel.app and aliased to the same
+production URL. Browser verified the selector persists across reloads. The static
+page still contains no live simulator or recording.
+
 1. Place the recording at `site/demo.mp4`, or host it at an HTTPS MP4/WebM URL.
 2. Set `videoUrl` in `site/demo-config.js` to `/demo.mp4` or that HTTPS URL.
 3. Update the page's recording status and description to match demonstrated

@@ -23,5 +23,10 @@ def fixtures():
     blocked=first.model_copy(deep=True);blocked.id='sealed_crossdock';blocked.name='Sealed cross-dock'
     blocked.objects.append(WorldObject.model_validate(
         obj('cross_aisle_barrier','barrier',[0,0],[20,.3],1.1)))
+    for world in [first,rotated,blocked]:
+        counts={}
+        for item in world.objects:
+            counts[item.type]=counts.get(item.type,0)+1
+            item.label=f"{item.type.replace('_',' ').capitalize()} {counts[item.type]}"
     return {w.id:w for w in [first,rotated,blocked]}
 WORLDS=fixtures()
