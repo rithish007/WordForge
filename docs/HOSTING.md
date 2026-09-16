@@ -21,7 +21,21 @@ the demo recording are pending. No OpenAI API key is used by this page.
   15 September 2026 in the browser and with anonymous HTTPS requests.
 
 The upload does not include Plan.md, agent configuration, local data or secrets.
-The original plan and other local setup changes remain uncommitted.
+The local simulator and theme source are checkpointed on `codex/local-demo`.
+
+## Theme update deployed 16 September
+
+- Existing project linked through Vercel CLI 59.18.0 from `site/`.
+- Command: `npx.cmd --yes vercel@59.18.0 deploy --prod --yes --scope rithishrs007projects`.
+- Deployment: https://worldforge-qb7nt4pq4-rithishrs007projects.vercel.app
+- Vercel returned READY and the existing production alias remains
+  https://worldforge-nine.vercel.app/.
+- Anonymous checks returned HTTP 200 for HTML, theme.css and warehouse.svg;
+  theme declarations are present. The system theme update is now public.
+- Local `.vercel/` and `.env*` are ignored; `.vercelignore` explicitly excludes
+  CLI environment files. Never include their contents in an upload or commit.
+- Git auto-deployment remains disconnected. Repeat the CLI deploy from `site/`
+  for later authorized static page updates.
 
 ## Add the actual video
 

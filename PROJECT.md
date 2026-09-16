@@ -9,11 +9,19 @@ Updated: 2026-09-16. Phase: **Prompt-first entry and detailed warehouse visuals 
   updates its background, floor, grid, walls and lighting without a reload.
 - Local browser previews checked both themes on the entry, lab and static page.
   Production frontend build passed; targeted geometry checks passed (2 tests).
-- The theme changes are local. The public Vercel page still needs a redeploy.
-  Vercel CLI 59.18.0 is cached, but CLI login/link/deploy has not been completed.
-- Next action: deploy only `site/` to the existing `worldforge` Vercel project,
-  then verify its public theme assets. Live chat generation remains a separate
-  unfinished milestone requiring implementation, server credentials and a budget.
+- Theme deployed on 16 September using Vercel CLI 59.18.0, after signing in and
+  linking `site/` to the existing `rithishrs007projects/worldforge` project.
+  `vercel deploy --prod --yes --scope rithishrs007projects` returned READY and
+  aliased https://worldforge-nine.vercel.app/ to deployment
+  `dpl_EPn1N3B3MBqA148LjULC9KR8c6XB`. Anonymous HTML, theme.css and warehouse.svg
+  checks returned HTTP 200 with the expected theme declarations.
+- CLI linking generated local environment metadata; `.gitignore` and
+  `site/.vercelignore` exclude it from source control and deployment.
+- Local app restarted using `scripts/start-demo.ps1`; health reports MuJoCo.
+- User requested review of both websites before any further product work.
+  Next action: discuss review feedback and remaining scope. Do not start live AI,
+  recording or public simulator hosting until that discussion.
+- Draft daily X posts are in `docs/X_POST_PLAN.md`; no posts sent or scheduled.
 
 ## Product direction clarified on 16 September
 
