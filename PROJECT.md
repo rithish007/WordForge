@@ -1,6 +1,59 @@
 # WorldForge project state
 
-Updated: 2026-09-16. Phase: **Prompt-first entry and detailed warehouse visuals added; live AI integration and recording pending.**
+Updated: 2026-09-17. Phase: **Minimal chat entry and simplified simulator UI verified locally; live AI integration and recording pending.**
+
+## Direct sample, categories and selection, 17 September
+
+- Open sample now links directly to `/lab?scenario=crossdock`; the three-choice
+  menu is removed from the composer. The lab still has its scenario selector.
+- User-defined object categories are optional WorldObject metadata, trimmed to
+  40 characters; blank values use the object's default type grouping. The editor
+  accepts new categories or existing suggestions. Grouping can use category,
+  physical object type, or no groups. Categories travel with validated JSON and
+  existing save/load/undo operations; they do not change registered object types,
+  collision geometry or the physical model. Old layouts without category load.
+  This is the implementation of the user's explicit recategorization request;
+  Plan.md remains intact.
+- Selection toggles on repeated object/list clicks; empty floor/background,
+  Escape and the editor close button deselect. Orbit drags do not clear selection.
+  Floor clicks retain mission placement through the existing inverse transform.
+  The selected-object editor now precedes the object list for easier access.
+- Checks: `npm.cmd run build --prefix web` passed; backend
+  `../.venv/Scripts/python.exe -m pytest -q`: 15 passed, 2 existing warnings.
+  New regression covers category JSON round-trip, old layouts, normalization,
+  length rejection and unchanged IDs, MJCF, occupancy and routes.
+- Actual browser: direct sample navigation, custom category reassignment, undo,
+  repeated scene click, empty floor/background deselection, Escape, editor close
+  and orbit drag selection retention passed. No captured console errors.
+  Restarted `./scripts/start-demo.ps1`; app at http://127.0.0.1:3000.
+- Next product ideas (proposals, not implemented scope): reliable project resume,
+  camera home/top/focus controls, clearer visual blocked-route diagnosis, direct
+  manipulation with redo, run comparison/export, and the real chat build/edit
+  loop once API access and budget are supplied. Recording remains the local gate.
+
+## Minimal workspace review, 17 September
+
+- Replaced the entry headline, explanatory copy, workflow steps, sample cards and
+  footer with a focused composer and compact sample menu. One short connection
+  note remains; Build world stays disabled until live AI is implemented/verified.
+- Replaced the application theme dropdown with a sliding sun/system/moon icon
+  control, accessible names, pressed states and persisted preferences.
+- Simplified the lab header and labels. File actions, robot specifications,
+  object lists and measurement notes expand on demand. Undo stays visible.
+  Results appear only after a measured run; the viewport makes room for them.
+  Reset clears the route/replay/results. Failure explanations remain visible.
+- Verification: `npm.cmd run build --prefix web` passed (including TypeScript).
+  Actual browser checks passed at desktop and 390 x 844: entry/sample navigation,
+  light/dark/system controls, dark preference after reload, expanded file actions,
+  object editor, barrier edit, PLAN_FAILED explanation, undo, run and reset.
+  The final browser run remained SUCCESS: 28.32 s, 21.95 m, zero contacts,
+  0.15 m displayed conservative clearance. No captured browser console errors.
+  `git diff --check` passed; original Plan.md SHA-256 is unchanged.
+- Local app started with `./scripts/start-demo.ps1` at http://127.0.0.1:3000.
+  Changes are local to the simulator app; the independent public submission page
+  was not changed or redeployed. No physics, planning or API changes were made.
+- Next: user review of the simplified screens, then the existing demo recording
+  and live-AI scope discussion. Live AI, video and contest submission remain pending.
 
 ## User review changes, 16 September
 

@@ -1,5 +1,5 @@
 export type Point=[number,number];
-export type WorldObject={id:string;label:string;type:string;center:Point;footprint:Point;height:number;yaw_deg:number;blocking:boolean};
+export type WorldObject={id:string;label:string;type:string;category?:string|null;center:Point;footprint:Point;height:number;yaw_deg:number;blocking:boolean};
 export type World={schema_version:1;id:string;name:string;type:string;bounds:{width:number;length:number;height:number};grid:{resolution:number};objects:WorldObject[];zones:{id:string;label:string;type:string;center:Point;extent:Point;yaw_deg:number}[];assumptions:string[]};
 export type Robot={id:string;name:string;manufacturer:string;footprint:Point;height:number;mass:number;max_linear_velocity:number;max_angular_velocity:number;collision_radius:number;safety_margin:number;datasheet_url:string;variant:string};
 export type Report={valid:boolean;navigable:boolean;errors:string[];warnings:string[];free_area_fraction:number;largest_component_fraction:number};

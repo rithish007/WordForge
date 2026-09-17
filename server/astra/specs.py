@@ -1,5 +1,5 @@
 from typing import Annotated, Literal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 import math
 
 Scalar = Annotated[float, Field(allow_inf_nan=False)]
@@ -22,11 +22,19 @@ class WorldObject(StrictModel):
     id: Identifier
     label: str = Field(min_length=1, max_length=100)
     type: ObjectType
+    category: str | None = Field(default=None, max_length=40)
     center: tuple[Scalar, Scalar]
     footprint: tuple[Positive, Positive]
     height: Positive
     yaw_deg: Annotated[float, Field(ge=-3600, le=3600, allow_inf_nan=False)] = 0
     blocking: bool = True
+
+    @field_validator('category', mode='before')
+    @classmethod
+    def normalize_category(cls, value):
+        if isinstance(value, str):
+            return value.strip() or None
+        return value
 
 class Zone(StrictModel):
     id: Identifier

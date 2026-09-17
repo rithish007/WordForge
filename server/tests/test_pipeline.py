@@ -12,6 +12,34 @@ from astra.simulator import simulate,mjcf
 from astra.main import app
 client=TestClient(app)
 
+def test_custom_categories_roundtrip_without_changing_physics():
+    original = WORLDS['crossdock']
+    payload = original.model_dump()
+    for obj in payload['objects']:
+        obj.pop('category', None)  # Existing saved layouts remain valid.
+    assert WorldSpec.model_validate(payload).objects[0].category is None
+    payload['objects'][0]['category'] = '  Receiving equipment  '
+    payload['objects'][1]['category'] = 'Receiving equipment'
+    response = client.post('/api/validate', json={'world': payload})
+    assert response.status_code == 200
+    assert response.json()['report']['valid']
+    world = WorldSpec.model_validate_json(WorldSpec.model_validate(response.json()['world']).model_dump_json())
+    assert world.objects[0].category == 'Receiving equipment'
+    assert world.objects[1].category == 'Receiving equipment'
+    assert world.objects[0].type == original.objects[0].type
+    assert [o.id for o in world.objects] == [o.id for o in original.objects]
+    robot = ROBOTS['rb_theron']
+    assert mjcf(world, robot) == mjcf(original, robot)
+    _, before = report_world(original, robot)
+    _, after = report_world(world, robot)
+    assert before.overlay() == after.overlay()
+    assert plan(before, (-8, -6), (8, 6)) == plan(after, (-8, -6), (8, 6))
+    payload['objects'][0]['category'] = '   '
+    assert WorldSpec.model_validate(payload).objects[0].category is None
+    payload['objects'][0]['category'] = 'x' * 41
+    assert client.post('/api/validate', json={'world': payload}).status_code == 422
+    assert original.objects[0].category is None
+
 @pytest.mark.parametrize('world_id',['crossdock','angled_depot'])
 @pytest.mark.parametrize('robot_id',list(ROBOTS))
 def test_real_missions(world_id,robot_id):
