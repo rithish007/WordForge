@@ -1,28 +1,19 @@
 'use client';
 import Link from 'next/link';
+import {useRouter} from 'next/navigation';
+import {useState} from 'react';
 import Brand from '@/components/Brand';
 import ThemeSelect from '@/components/ThemeSelect';
-import {useState} from 'react';
-
+import Composer from '@/components/Composer';
+import {AIConnectionButton,aiRequest,useAI} from '@/components/AIConnection';
+import {World} from '@/lib/types';
 export default function Home(){
- const [prompt,setPrompt]=useState(''),[copied,setCopied]=useState(false),[copyError,setCopyError]=useState('');
- async function copyBrief(){try{await navigator.clipboard.writeText(prompt);setCopied(true);setCopyError('');}catch{setCopyError('Select your text and copy it to Codex.');}}
- return <main className="entry-page">
-  <header className="topbar"><Link className="brand" href="/"><Brand/></Link><ThemeSelect/></header>
-  <section className="entry-hero" aria-label="New simulation">
-   <h1 className="sr-only">Create a simulation</h1>
-   <form className="prompt-card" onSubmit={e=>e.preventDefault()}>
-    <label htmlFor="environment-prompt" className="sr-only">Describe your environment and simulation</label>
-    <div className="prompt-input">
-     <textarea autoFocus rows={2} id="environment-prompt" maxLength={2000} value={prompt} onChange={e=>{setPrompt(e.target.value);setCopied(false);}} placeholder="What would you like to simulate?"/>
-     <div className="composer-toolbar">
-      <Link className="sample-link" href="/lab?scenario=crossdock">Open sample <span aria-hidden="true">↗</span></Link>
-      <div className="composer-actions">{prompt.trim()&&<button type="button" className="copy-brief" onClick={()=>void copyBrief()}>{copied?'Copied':'Copy brief'}</button>}<button className="primary send-button" disabled aria-label="Build world" title="Live AI is not connected" aria-describedby="ai-status"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="m6 10 6-6 6 6M12 4v16"/></svg></button></div>
-     </div>
-    </div>
-    <p className="connection-note" id="ai-status">Live AI is not connected. Open a sample to start.</p>
-    <p role="status" className="copy-status">{copyError|| (copied?'Brief copied for Codex.':'')}</p>
-   </form>
-  </section>
- </main>;
+ const [busy,setBusy]=useState(false),[error,setError]=useState('');const router=useRouter(),ai=useAI();
+ async function build(prompt:string,attached?:World){setBusy(true);setError('');try{
+  const world=prompt?(await aiRequest<{world:World}>('build',{prompt,world:attached??null})).world:attached;
+  if(!world)throw new Error('Describe a world or attach a WorldForge JSON layout.');
+  sessionStorage.setItem('worldforge.active-world',JSON.stringify(world));router.push('/lab?source=build');return true;
+ }catch(e){setError(e instanceof Error?e.message:'Could not build this world.');return false;}finally{setBusy(false);void ai.refresh();}}
+ return <main className="entry-page"><header className="topbar"><Link className="brand" href="/"><Brand/></Link><div className="top-right"><AIConnectionButton/><ThemeSelect/></div></header>
+ <section className="entry-hero" aria-label="New simulation"><h1 className="sr-only">Build a robot environment</h1><div className="entry-composer"><Composer onBuild={build} busy={busy}/>{error&&<p className="feedback-error" role="alert">{error}</p>}</div></section></main>;
 }

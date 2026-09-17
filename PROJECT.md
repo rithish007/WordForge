@@ -1,6 +1,66 @@
 # WorldForge project state
 
-Updated: 2026-09-17. Phase: **Minimal chat entry and simplified simulator UI verified locally; live AI integration and recording pending.**
+Updated: 2026-09-17. Phase: **Submission first: robotics-focused editor and visitor-funded AI connection. Live model and public simulator verification pending.**
+
+## Submission editor and visitor funding, 17 September
+
+- Latest user direction supersedes discovery-first sequencing: robotics engineers
+  are the priority, creators are excluded, market research postponed until after
+  submission. The research guide is retained as historical work; no interviews
+  are required before continuing the submission. Plan.md remains intact.
+- Simulation now has scene hierarchy left, viewport centre, inspector right and
+  collapsible Chat/Results below. Desktop splitters support dragging, keyboard
+  arrows, reset and persisted sizes. Narrow layouts stack sections. Results open
+  after a run. Existing editing, categories, selection, undo and simulation remain.
+- Reference-inspired rounded composer has Attach, Build and Open sample below;
+  no voice controls or scenario menus. Open sample directly enters the lab.
+  Attach supports validated WorldForge JSON only; custom model import and BREAK
+  remain unimplemented. Chat editing uses the same validated atomic apply path.
+- Visitor-funded API connection implemented with explicit consent, a temporary
+  server-memory key, HttpOnly cookie, daily allowance, durable concurrent spend
+  reservations and graceful no-key samples. No owner API-key fallback. Uses one
+  Responses typed proposal with configurable Astra model. No paid calls made.
+  See `docs/AI_CONNECTION.md` for exact limits, credentials and deployment scope.
+- Verification: production Next.js build passed; backend pytest 26 passed,
+  2 existing warnings. New AI tests are mocked, not live model evals. Browser:
+  direct sample, disconnected Build/settings, JSON attach-to-editor, resizing by
+  mouse and keyboard, persistence after reload, collapse/reset, dark theme,
+  object toggle selection and a real sample run passed. Run: SUCCESS, 28.32s,
+  21.95m, zero contacts, 0.15m minimum clearance. No captured console errors.
+- Local preview: http://127.0.0.1:3000 via `scripts/start-demo.ps1`.
+  Hosted static submission page unchanged. Simulator deployment, funded Astra
+  access/evals, recording and actual submission remain pending; none claimed done.
+- Next: validate a funded visitor key with Astra access and the build/edit evals,
+  then capture the submission recording using the verified local physics loop.
+
+## Product discovery direction, 17 September
+
+- User wants market validation questions before building the broader product.
+  `docs/MARKET_DISCOVERY.md` contains a reusable interview guide, short outreach
+  questionnaire, separate creator/robotics branches and an evidence sheet.
+  No interviews or market viability claims have been made.
+- Intended audiences: creators building attractive environments, and engineers
+  bringing their own robots to evaluate behaviour. Research them separately.
+- Desired future experience: hosted website; AI builds from user-provided assets;
+  manual and chat editing; later asset import; simplified collision shapes;
+  familiar minimal editor with resizable panels (assets/objects left, viewport
+  centre, inspector right, collapsible chat/results below).
+- AI priorities: environment generation and layout improvements after failure
+  analysis. BREAK is still unimplemented; the manual barrier case is not BREAK.
+- Warehouse/ground mobile robots first. Shipyards, forests/agricultural ground
+  environments are possible later domains subject to validation; aerial and
+  underwater remain excluded for now.
+- Funding preference: users fund their own AI initially; later possibly credits,
+  model/effort controls and connectors. The requested ChatGPT-account sign-in
+  does not establish funded general API access. Official docs distinguish
+  subscription authentication from billed Platform API-key access; supported
+  funding/authentication integration is unresolved. No paid calls authorized.
+- GLB/glTF is a candidate for visual assets, not a complete robot behaviour
+  description. Determine actual robot/controller requirements through interviews.
+- This turn only added research documentation and recorded direction. No app
+  expansion, hosting changes, model importer or authentication was implemented.
+  Plan.md preserved. Next: conduct first interviews and compare concrete needs,
+  switching barriers and pilot commitments before selecting the broader MVP.
 
 ## Direct sample, categories and selection, 17 September
 

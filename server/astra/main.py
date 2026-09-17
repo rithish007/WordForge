@@ -7,6 +7,8 @@ from .fixtures import WORLDS
 from .geometry import report_world
 from .planner import plan
 app=FastAPI(title='WorldForge local simulator',version='0.1.0')
+from .ai import router as ai_router
+app.include_router(ai_router)
 ROOT=Path(__file__).resolve().parents[2]
 RUN_LOCK=threading.Lock()
 class ValidationRequest(StrictModel):
