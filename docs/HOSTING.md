@@ -7,6 +7,22 @@ the demo recording are pending. No OpenAI API key is used by this page.
 
 ## Source and deployment
 
+Latest presentation polish, 17 September: icon-only expanding horizontal notch,
+magnetic pointer, larger typography, wide video area, cleaned illustration and
+profile link deployed as https://worldforge-gyhtt356q-rithishrs007projects.vercel.app
+and verified at the existing production alias. `site/interaction.js` is a new
+static runtime asset. Recording remains pending.
+
+Latest update, 17 September: redesigned landing page with centred typography,
+notch menu, shared app theme and explicit local-access dialog deployed successfully
+as https://worldforge-88zyy2d1d-rithishrs007projects.vercel.app and aliased to
+https://worldforge-nine.vercel.app/. Production browser verification passed,
+including the access dialog and mobile layout. Command from `site/`:
+`npx.cmd --offline --yes vercel@59.18.0 deploy --prod --yes --scope rithishrs007projects`.
+The existing cached CLI was used after the online npx registry lookup stalled.
+No recording or hosted simulator was added. Submission next steps are in
+`docs/SUBMIT_NOW.md`.
+
 - GitHub: https://github.com/rithish007/WordForge
 - Site commit: `83c8146`, pushed to `main`.
 - Vercel account/team: `rithishrs007projects` (Hobby).
@@ -81,3 +97,14 @@ Open http://127.0.0.1:4173 in the browser.
 - Actual video playback cannot be verified until a recording is supplied.
 - Production HTML and all five referenced assets return HTTP 200 without cookies
   or authentication. The expected title and development status match the source.
+
+## Recording and Analytics update, 18 September
+
+Published the supplied Blob recording at the existing production URL. The player
+uses its intrinsic aspect ratio. Vercel Web Analytics is enabled and the static
+script returned HTTP 200; the dashboard received the verification page view.
+Public browser playback advanced beyond 20 seconds without console errors.
+Deployment: https://worldforge-e0mbr6jyj-rithishrs007projects.vercel.app
+Portfolio: https://rithish.vercel.app/
+The root SampleRec.mp4 is not deployed or committed; demo-config.js holds the
+public Blob URL. This supersedes earlier recording-pending verification notes.

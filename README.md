@@ -7,8 +7,8 @@ targeting 18 September 2026. The GitHub repository is named WordForge.
 **Submission page:** [worldforge-nine.vercel.app](https://worldforge-nine.vercel.app/)
 
 The static page is live. The local simulator now runs two warehouse robots with
-validated editing, safe route planning and measured MuJoCo results. The recording
-and public simulator backend are pending. See [local demo instructions](docs/LOCAL_DEMO.md)
+validated editing, safe route planning and measured MuJoCo results. The recorded demo is embedded on the submission page. The public simulator
+backend remains pending. See [local demo instructions](docs/LOCAL_DEMO.md)
 and [deployment details](docs/HOSTING.md).
 
 ## Run the local demo
@@ -17,9 +17,10 @@ From this checkout in PowerShell, run `./scripts/start-demo.ps1`, then open
 http://127.0.0.1:3000. Dependencies are installed on this computer. For a fresh
 checkout, follow [LOCAL_DEMO.md](docs/LOCAL_DEMO.md).
 
-The home page starts with a prompt box; live AI generation is not connected yet.
-Choose the **The cross-dock** sample to open the lab, then click **Plan route**
-and **Run simulation**. Add the
+The home page starts with a prompt box. Visitor-funded AI connection is implemented;
+live model verification is pending. See [AI connection](docs/AI_CONNECTION.md).
+Choose **Open sample** to open the lab, then click **Plan route**
+and **Run**. Add the
 cross-aisle barrier to demonstrate an explained planning failure; undo restores
 the world. Importable scenario files and the JSON schema are in `examples/`.
 No application API key is needed for this explicit fixture/import mode.
@@ -56,5 +57,8 @@ loads them for trusted projects; an existing app task may retain an explicit
 model selection. See [Codex configuration](https://learn.chatgpt.com/docs/config-file/config-basic).
 
 The local foundation, planning and physics slice is implemented and tested.
-Live in-app AI, a public simulator backend, recording and submission remain;
+Live AI verification, a public simulator backend, recording and submission remain;
 see [PROJECT.md](PROJECT.md) for verification evidence and current scope.
+
+For the current deadline, use the [submission handoff](docs/SUBMIT_NOW.md):
+recording sequence, live chat check, ready-to-use listing copy and deferred work.

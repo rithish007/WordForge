@@ -1,10 +1,9 @@
 'use client';
 import dynamic from 'next/dynamic';
-import Brand from './Brand';
-import ThemeSelect from './ThemeSelect';
+import AppHeader from './AppHeader';
 import EditorFrame from './EditorFrame';
 import Composer from './Composer';
-import {AIConnectionButton,aiRequest,useAI} from './AIConnection';
+import {aiRequest,useAI} from './AIConnection';
 import {useEffect,useRef,useState} from 'react';
 import {api,download,World,WorldObject,Robot,Point,Report,Grid,Route,Result,Frame} from '@/lib/types';
 const WorldScene=dynamic(()=>import('@/components/WorldScene'),{ssr:false,loading:()=> <div className="scene-loading">Opening the warehouse…</div>});
@@ -71,11 +70,11 @@ export default function WarehouseLab(){
   }catch(e){setError(message(e));return false;}finally{setChatBusy(false);void ai.refresh();}
  }
  return <main className="robot-editor">
- <header className="topbar"><a className="brand" href="/"><Brand/><span className="brand-divider">/</span><span className="brand-sub">Simulation</span></a><div className="top-right"><AIConnectionButton/><ThemeSelect/></div></header>
+ <AppHeader page="Simulation"/>
  <EditorFrame tab={consoleTab} setTab={setConsoleTab} hasResult={!!result} scene={<>
  <div className="section-title"><span>World</span><button className="undo-button" aria-label="Undo last world edit" title="Undo last world edit" disabled={!history.length||!!busy} onClick={async()=>{const prev=history.at(-1);if(prev&&await apply(prev,'Last world edit undone.',false))setHistory(h=>h.slice(0,-1));}}><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12" transform="translate(0 -2)"/></svg></button></div>
  <label className="sr-only" htmlFor="world-select">Scenario</label><select id="world-select" disabled={!!busy||!world} value={worlds.some(w=>w.id===world?.id)?world?.id:''} onChange={async e=>{const w=worlds.find(w=>w.id===e.target.value);if(w&&await apply(w,'Scenario loaded.')){setStart(w.zones[0]?.center??[-2,-2]);setGoal(w.zones[1]?.center??[2,2]);}}}><option value="" disabled>Imported world</option>{worlds.map(w=><option key={w.id} value={w.id}>{w.name}</option>)}</select>
- {world&&<div className="world-facts"><span>{world.bounds.width} × {world.bounds.length} m</span><span>{world.objects.length} objects</span></div>}
+ {world&&<div className="world-facts"><span>{world.bounds.width} × {world.bounds.length} m</span></div>}
  <details className="inspector-section"><summary>Files</summary><div className="button-row"><button disabled={!!busy} onClick={()=>input.current?.click()}>Import world</button><button disabled={!world||!!busy} onClick={()=>world&&download(world.id+'.json',world)}>Export world</button></div>
  <p className="file-hint">WorldForge JSON layouts only. Import replaces this world; undo restores it.</p>
  <input hidden type="file" ref={input} accept=".json,application/json" onChange={e=>{const f=e.target.files?.[0];if(f)void importFile(f);e.target.value='';}}/>

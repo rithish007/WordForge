@@ -5,6 +5,6 @@ function snapshot(){return document.documentElement.dataset.theme==='dark';}
 export function useSystemDark(){return useSyncExternalStore(subscribe,snapshot,()=>false);}
 export function useThemeMode(){return useSyncExternalStore(subscribe,()=>document.documentElement.dataset.themeMode??'auto',()=> 'auto');}
 export const sceneThemes={
- light:{background:'#e8eeeb',floor:'#f8faf7',grid:'#d5dfd9',boundary:'#7f9990',walls:'#8ca497',ambient:1.5,sun:2.8},
- dark:{background:'#15171b',floor:'#272b31',grid:'#424851',boundary:'#8c949f',walls:'#7a838f',ambient:1.1,sun:2.2}
+ light:{background:'#edf0ea',floor:'#fafbf7',grid:'#dce2d6',boundary:'#909e87',walls:'#99a590',ambient:1.5,sun:2.8},
+ dark:{background:'#171d18',floor:'#283029',grid:'#414b41',boundary:'#929e8e',walls:'#7b8977',ambient:1.1,sun:2.2}
 };

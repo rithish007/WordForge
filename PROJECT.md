@@ -1,6 +1,82 @@
 # WorldForge project state
 
-Updated: 2026-09-17. Phase: **Submission first: robotics-focused editor and visitor-funded AI connection. Live model and public simulator verification pending.**
+Updated: 2026-09-18. Phase: **Submission first: robotics-focused editor and visitor-funded AI connection. Live model and public simulator verification pending.**
+
+## Published recording and analytics, 18 September
+
+- Embedded the user-supplied Vercel Blob recording (SampleRec.mp4), 2558 x 1496,
+  156.57 seconds. The full-width player uses its intrinsic ratio without added
+  letterboxing; the short local-prototype caption sits outside the player.
+- Added the official static-site Vercel Web Analytics script through analytics.js.
+  HTTPS deployments collect page views; local HTTP previews do not. Dashboard
+  confirmed Analytics enabled, then received 1 visitor and 1 page view.
+- Profile navigation on landing, Build and Simulation, plus the landing footer,
+  points to https://rithish.vercel.app/ as supplied by the user.
+- Published https://worldforge-nine.vercel.app/ via READY deployment
+  https://worldforge-e0mbr6jyj-rithishrs007projects.vercel.app. Public browser
+  verified recording playback advancing beyond 20 seconds, no captured console
+  errors, and the portfolio footer URL. Analytics script returned HTTP 200.
+- Checks: node --check site/analytics.js and site/demo.js; web TypeScript check
+  passed with --incremental false (existing build-cache file is not writable).
+  Previous UI production-build evidence remains in the checkpoint below.
+- Raw root SampleRec.mp4 stays outside Git; the site streams the supplied Blob URL.
+  Actual challenge submission and live-model validation remain pending.
+
+## Submission design checkpoint, 17 September
+
+### Final presentation refinements
+
+- Removed the landing Overview label and What works today section. The icon-only
+  notch expands horizontally on fine-pointer hover, focus or tap; Escape/outside
+  interaction closes it. Shared magnetic pointer and gentle control attraction
+  preserve native pointers for inputs, dialogs, resizing, video and 3D interaction;
+  reduced-motion/coarse-pointer settings disable magnetic effects.
+- Enlarged body text and small headings across the landing/editor. Video area
+  spans the available page width with a 16:9 presentation area and no video-height
+  cap. Removed embedded illustration text/callout labels; caption is below it.
+- Hero Explore prototype now scrolls to the demo. View source and Run locally
+  are together beside its heading, with no duplicate button inside the player.
+  Footer links to the existing @rithish007 GitHub profile. Connect AI is visibly
+  styled as a button; redundant object count removed from world details.
+- Shared interactions are in `site/interaction.js`, copied to `web/public/` by
+  sync-design.ps1 alongside shared CSS. JS syntax and Next production build pass;
+  git diff check passes. Actual browser verified expanded one-row menu, Escape,
+  demo anchor/full-width area, Connect AI dialog, removed details and public page.
+  No captured public-page console errors. Physics/API code unchanged.
+- Published and browser-verified https://worldforge-nine.vercel.app/ via READY
+  deployment https://worldforge-gyhtt356q-rithishrs007projects.vercel.app.
+  Local simulator restarted with the final build. Recording is still pending.
+
+- User reports 11 hours to submission and explicitly requests conserving the
+  current usage window. Feature expansion stopped after the presentation pass.
+  Cloud backend, accounts, storage and model import remain deferred.
+- Rebuilt the static landing page as a centred, bold composition with substantially
+  less copy and a top-edge notch menu, inspired by the two supplied references.
+  The same shared foundation and navigation now cover Build and Simulation.
+  `site/design.css` is the shared source; `scripts/sync-design.ps1` copies it to
+  `web/app/design.css`. Added matching light/dark illustration variants and
+  retained the honest recording/local-only status and working video integration.
+- Published the static redesign to the existing Vercel project:
+  https://worldforge-nine.vercel.app/ (READY deployment
+  https://worldforge-88zyy2d1d-rithishrs007projects.vercel.app).
+  Browser verified the public title, layout and local-setup dialog. Public links
+  do not point to localhost. Local landing preview links to the local app.
+- Checks: Next.js production build passed; `node --check` for site.js, demo.js
+  and theme.js passed; git diff whitespace check passed. Actual browser verified
+  the notch menu, Build navigation, landing dark theme, 390px responsive layout
+  without horizontal overflow, successful MuJoCo run and barrier PLAN_FAILED.
+  Successful run: 28.32s, 21.95m, zero contacts, 0.15m minimum clearance.
+  No captured app console errors. No physics/API logic changed in this pass.
+- Local servers remain available at http://127.0.0.1:3000 and landing preview
+  http://127.0.0.1:4173. No paid model call or new cloud resource provisioned.
+- `docs/SUBMIT_NOW.md` contains the remaining ordered actions, 80-second recording
+  script, copy-ready listing, live chat test and answers about analytics/hosting/
+  accounts/BREAK/models/storage. README now describes the implemented connection
+  accurately. Recording, live AI verification and actual submission remain pending.
+- Next: user checks authenticated challenge requirements/cutoff and records the
+  verified local sequence. Attach the real recording, redeploy and verify playback,
+  then finish the submission. The public countdown scrape showed zero and the
+  linked Notion guide returned 404, so video-only eligibility is not established.
 
 ## Submission editor and visitor funding, 17 September
 
