@@ -1,0 +1,51 @@
+:root{color-scheme:light}
+
+:root[data-theme="dark"]{color-scheme:dark}
+
+:root[data-theme="dark"]{--ink:#e8eaed;--muted:#a6adb8;--paper:#131519;--line:#353a43;--orange:#ef9b68;--green:#536171}
+:root[data-theme="dark"] body{background:var(--paper)}
+:root[data-theme="dark"] button,:root[data-theme="dark"] select,:root[data-theme="dark"] input[type=number]{background:#23262d;border-color:#48505c;color:var(--ink)}
+:root[data-theme="dark"] button:hover{background:#303641}
+:root[data-theme="dark"] .topbar,:root[data-theme="dark"] .sidebar{background:#191c21}
+:root[data-theme="dark"] .brand-divider{color:#59616e}
+:root[data-theme="dark"] .brand-mark{background:#394652}
+:root[data-theme="dark"] .small-tag,:root[data-theme="dark"] .object-arrow,:root[data-theme="dark"] .sidebar-foot{color:#a6adb8}
+:root[data-theme="dark"] .object-row{background:transparent}
+:root[data-theme="dark"] .object-row:hover,:root[data-theme="dark"] .object-row.selected{background:#303641}
+:root[data-theme="dark"] .quiet-row button,:root[data-theme="dark"] .subtle,:root[data-theme="dark"] .point-button{background:transparent}
+:root[data-theme="dark"] .validation-pill{border-color:#796340;color:#e8bf80}
+:root[data-theme="dark"] .validation-pill.good{background:#21332c;border-color:#416349;color:#b6d6a7}
+:root[data-theme="dark"] .validation-pill.good span{background:#99c486}
+:root[data-theme="dark"] .viewport{background:#15171b;border-color:#3d444e}
+:root[data-theme="dark"] .viewport-bottom,:root[data-theme="dark"] .zone-label{color:#c9ced6}
+:root[data-theme="dark"] .viewport-chip,:root[data-theme="dark"] .overlay-toggle{background:#1c2028ed;color:#e0e4eb;border-color:#495260}
+:root[data-theme="dark"] .overlay-toggle input{accent-color:#91c59b}
+:root[data-theme="dark"] .busy-indicator{background:#272d36;box-shadow:0 5px 24px #0005}
+:root[data-theme="dark"] .spinner{border-color:#515c6c;border-top-color:#bbdcaa}
+:root[data-theme="dark"] .point-button.active{background:#3e3021;border-color:#d79056}
+:root[data-theme="dark"] .point-letter{background:#2d4834;color:#b8dcae}
+:root[data-theme="dark"] .point-letter.orange{background:#4b3424;color:#f5c590}
+:root[data-theme="dark"] .route-arrow{color:#a6adb8}
+:root[data-theme="dark"] .primary{background:#c4d1e1;border-color:#c4d1e1;color:#1b2430}
+:root[data-theme="dark"] .primary:hover{background:#dce5ef}
+:root[data-theme="dark"] .feedback-warning{color:#edbd83}
+:root[data-theme="dark"] .feedback-error{color:#ffb4a4;background:#44261f;border-color:#865347}
+:root[data-theme="dark"] .feedback-success{color:#acd39e}
+:root[data-theme="dark"] .physics-label{color:#b9c2cf;border-color:#46505e}
+:root[data-theme="dark"] .entry-page{background:radial-gradient(ellipse at 50% 20%,#202631 0,transparent 56%),var(--paper)}
+:root[data-theme="dark"] .entry-kicker,:root[data-theme="dark"] .entry-lead,:root[data-theme="dark"] .entry-flow,:root[data-theme="dark"] .scenario-copy p{color:#acb6c4}
+:root[data-theme="dark"] .entry-hero h1 em{color:#d0d8e5}
+:root[data-theme="dark"] .prompt-card{background:#20242b;border-color:#4a5360;box-shadow:0 12px 36px #0002}
+:root[data-theme="dark"] .prompt-card textarea{color:var(--ink)}
+:root[data-theme="dark"] .prompt-card textarea::placeholder{color:#a0a8b5}
+:root[data-theme="dark"] .scope-pill{background:#303741;color:#bfc8d6}
+:root[data-theme="dark"] .prompt-toolbar .primary:disabled{background:#465362;border-color:#465362;color:#d6dde7}
+:root[data-theme="dark"] .connection-note{background:#191d23;border-color:#373e49;color:#b1bac7}
+:root[data-theme="dark"] .connection-note button{color:#d1d9e5;background:none}
+:root[data-theme="dark"] .entry-flow b,:root[data-theme="dark"] .entry-flow i,:root[data-theme="dark"] .demo-section-heading>span,:root[data-theme="dark"] .scenario-number,:root[data-theme="dark"] .scenario-copy h3 span,:root[data-theme="dark"] .entry-footer{color:#a3afbe}
+:root[data-theme="dark"] .scenario-card{background:#1e2229;border-color:#3e4652}
+:root[data-theme="dark"] .scenario-card:hover{box-shadow:0 7px 20px #0004}
+:root[data-theme="dark"] .scenario-diagram{background-color:#272d36;background-image:linear-gradient(#8d9aaf20 1px,transparent 1px),linear-gradient(90deg,#8d9aaf20 1px,transparent 1px);border-color:#495361}
+:root[data-theme="dark"] .diagram-start,:root[data-theme="dark"] .diagram-goal{border-color:#272d36}
+:root[data-theme="dark"] .diagram-start{background:#9fb6d0}
+:root[data-theme="dark"] .entry-footer{border-color:#3c444f}

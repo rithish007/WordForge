@@ -7,8 +7,10 @@ if (typeof demoUrl === "string" && demoUrl.trim()) {
       throw new Error("Use a local or HTTPS video source.");
     }
     const video = document.getElementById("demo-video");
-    video.src = source.href;
     video.addEventListener("loadedmetadata", () => {
+      if (video.videoWidth && video.videoHeight) {
+        document.getElementById("demo-panel").style.setProperty("--video-ratio", String(video.videoWidth / video.videoHeight));
+      }
       document.getElementById("demo-placeholder").hidden = true;
       document.getElementById("video-note").hidden = false;
       video.hidden = false;
@@ -19,6 +21,7 @@ if (typeof demoUrl === "string" && demoUrl.trim()) {
       video.hidden = true;
       document.querySelector("#demo-placeholder p").textContent = "The recording is temporarily unavailable. Please try again later.";
     });
+    video.src = source.href;
   } catch (error) {
     console.error("Demo video configuration:", error.message);
   }

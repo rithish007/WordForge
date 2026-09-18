@@ -1,0 +1,17 @@
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.entry-page{min-height:100dvh}
+.entry-hero{width:min(100%,760px);margin:auto;padding:0 24px;min-height:calc(100dvh - 64px);display:flex;align-items:center;transform:translateY(-5vh)}
+.prompt-card{width:100%}
+.prompt-input{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 8px 28px #00000005}
+.prompt-input:focus-within{border-color:var(--muted)}
+.prompt-input textarea{display:block;width:100%;min-height:80px;max-height:240px;resize:vertical;field-sizing:content;background:transparent;border:0;color:var(--ink);font:17px/1.6 Arial,Helvetica,sans-serif;padding:0 4px 18px}
+.prompt-input textarea:focus-visible{outline:none}
+.prompt-input textarea::placeholder{color:var(--muted)}
+.composer-toolbar,.composer-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.composer-actions{margin-left:auto}
+.composer-actions .copy-brief{border:0;background:transparent;font-size:12px;color:var(--muted);font-weight:400}
+.send-button{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;padding:0}
+.connection-note,.copy-status{color:var(--muted);font-size:12px;text-align:center;line-height:1.6;margin-top:14px}
+.copy-status:empty{display:none}
+.sample-link{font-size:13px;color:var(--muted);text-decoration:none;padding:8px 4px;border-radius:4px}.sample-link span{margin-left:8px}.sample-link:hover{color:var(--ink)}
+@media(max-width:760px){.entry-hero{padding:0 18px}.prompt-input{padding:16px}.prompt-input textarea{font-size:16px}}

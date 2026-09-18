@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "id": "sealed_crossdock",
+  "name": "Sealed cross-dock",
+  "type": "warehouse",
+  "bounds": {
+    "width": 20.0,
+    "length": 16.0,
+    "height": 5.0
+  },
+  "grid": {
+    "resolution": 0.1
+  },
+  "zones": [
+    {
+      "id": "receiving",
+      "label": "Receiving",
+      "type": "receiving",
+      "center": [
+        -8.0,
+        -6.0
+      ],
+      "extent": [
+        2.0,
+        2.0
+      ],
+      "yaw_deg": 0
+    },
+    {
+      "id": "packing",
+      "label": "Packing",
+      "type": "packing",
+      "center": [
+        8.0,
+        6.0
+      ],
+      "extent": [
+        2.0,
+        2.0
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": "rack_west_south",
+      "label": "Rack 1",
+      "type": "rack",
+      "center": [
+        -4.0,
+        -4.0
+      ],
+      "footprint": [
+        2.0,
+        4.0
+      ],
+      "height": 2.2,
+      "yaw_deg": 0.0,
+      "blocking": true
+    },
+    {
+      "id": "rack_west_north",
+      "label": "Rack 2",
+      "type": "rack",
+      "center": [
+        -4.0,
+        4.0
+      ],
+      "footprint": [
+        2.0,
+        4.0
+      ],
+      "height": 2.2,
+      "yaw_deg": 0.0,
+      "blocking": true
+    },
+    {
+      "id": "rack_east_south",
+      "label": "Rack 3",
+      "type": "rack",
+      "center": [
+        4.0,
+        -4.0
+      ],
+      "footprint": [
+        2.0,
+        4.0
+      ],
+      "height": 2.2,
+      "yaw_deg": 0.0,
+      "blocking": true
+    },
+    {
+      "id": "rack_east_north",
+      "label": "Rack 4",
+      "type": "rack",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "footprint": [
+        2.0,
+        4.0
+      ],
+      "height": 2.2,
+      "yaw_deg": 0.0,
+      "blocking": true
+    },
+    {
+      "id": "pallet_north",
+      "label": "Pallet 1",
+      "type": "pallet",
+      "center": [
+        0.0,
+        6.0
+      ],
+      "footprint": [
+        1.2,
+        1.0
+      ],
+      "height": 0.6,
+      "yaw_deg": 20.0,
+      "blocking": true
+    },
+    {
+      "id": "packing_bench",
+      "label": "Packing station 1",
+      "type": "packing_station",
+      "center": [
+        8.0,
+        2.0
+      ],
+      "footprint": [
+        1.4,
+        2.0
+      ],
+      "height": 1.0,
+      "yaw_deg": 0.0,
+      "blocking": true
+    },
+    {
+      "id": "charger_south",
+      "label": "Charger 1",
+      "type": "charger",
+      "center": [
+        0.0,
+        -7.0
+      ],
+      "footprint": [
+        1.2,
+        0.5
+      ],
+      "height": 0.6,
+      "yaw_deg": 0.0,
+      "blocking": true
+    },
+    {
+      "id": "cross_aisle_barrier",
+      "label": "Barrier 1",
+      "type": "barrier",
+      "center": [
+        0.0,
+        0.0
+      ],
+      "footprint": [
+        20.0,
+        0.3
+      ],
+      "height": 1.1,
+      "yaw_deg": 0.0,
+      "blocking": true
+    }
+  ],
+  "assumptions": [
+    "Astra-authored local fixture. Primitive bodies; no live model call.",
+    "Bounds are clear interior floor dimensions. All distances are metres."
+  ]
+}

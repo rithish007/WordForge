@@ -1,0 +1,275 @@
+{
+  "$defs": {
+    "Bounds": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "maximum": 60,
+          "minimum": 4,
+          "title": "Width",
+          "type": "number"
+        },
+        "length": {
+          "maximum": 60,
+          "minimum": 4,
+          "title": "Length",
+          "type": "number"
+        },
+        "height": {
+          "default": 5,
+          "maximum": 12,
+          "minimum": 1,
+          "title": "Height",
+          "type": "number"
+        }
+      },
+      "required": [
+        "width",
+        "length"
+      ],
+      "title": "Bounds",
+      "type": "object"
+    },
+    "GridSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "resolution": {
+          "default": 0.1,
+          "maximum": 0.5,
+          "minimum": 0.05,
+          "title": "Resolution",
+          "type": "number"
+        }
+      },
+      "title": "GridSpec",
+      "type": "object"
+    },
+    "WorldObject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "rack",
+            "pallet",
+            "crate",
+            "barrier",
+            "pillar",
+            "charger",
+            "packing_station",
+            "door_frame"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "center": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Center",
+          "type": "array"
+        },
+        "footprint": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 60,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 60,
+              "type": "number"
+            }
+          ],
+          "title": "Footprint",
+          "type": "array"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 60,
+          "title": "Height",
+          "type": "number"
+        },
+        "yaw_deg": {
+          "default": 0,
+          "maximum": 3600,
+          "minimum": -3600,
+          "title": "Yaw Deg",
+          "type": "number"
+        },
+        "blocking": {
+          "default": true,
+          "title": "Blocking",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "type",
+        "center",
+        "footprint",
+        "height"
+      ],
+      "title": "WorldObject",
+      "type": "object"
+    },
+    "Zone": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 80,
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "type": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Type",
+          "type": "string"
+        },
+        "center": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Center",
+          "type": "array"
+        },
+        "extent": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 60,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 60,
+              "type": "number"
+            }
+          ],
+          "title": "Extent",
+          "type": "array"
+        },
+        "yaw_deg": {
+          "default": 0,
+          "maximum": 3600,
+          "minimum": -3600,
+          "title": "Yaw Deg",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "type",
+        "center",
+        "extent"
+      ],
+      "title": "Zone",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "id": {
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "type": {
+      "const": "warehouse",
+      "default": "warehouse",
+      "title": "Type",
+      "type": "string"
+    },
+    "bounds": {
+      "$ref": "#/$defs/Bounds"
+    },
+    "grid": {
+      "$ref": "#/$defs/GridSpec"
+    },
+    "zones": {
+      "items": {
+        "$ref": "#/$defs/Zone"
+      },
+      "maxItems": 40,
+      "title": "Zones",
+      "type": "array"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/WorldObject"
+      },
+      "maxItems": 400,
+      "title": "Objects",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "maxItems": 40,
+      "title": "Assumptions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "bounds"
+  ],
+  "title": "WorldSpec",
+  "type": "object"
+}

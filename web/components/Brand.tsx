@@ -1,0 +1,1 @@
+export default function Brand(){return <><svg className="brand-logo" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z M3 9.5 16 17l13-7.5 M16 17v13" fill="none" stroke="currentColor" strokeWidth="2"/></svg>WorldForge<span className="brand-dot">.</span></>;}
