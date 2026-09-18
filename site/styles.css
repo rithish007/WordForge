@@ -9,3 +9,6 @@
 
 /* Fit the recording without letterboxing or extra panel padding. */
 #demo-video{display:block;width:100%;height:auto;max-height:none}.demo-section .video-note{padding:12px 0 0}.demo-section .demo-placeholder{aspect-ratio:auto;min-height:220px}
+
+/* Keep the full recording and its controls comfortably within one viewport. */
+.demo-panel{max-width:calc(72svh * var(--video-ratio,1.71));margin-inline:auto}

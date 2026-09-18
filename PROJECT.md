@@ -2,6 +2,17 @@
 
 Updated: 2026-09-18. Phase: **Submission first: robotics-focused editor and visitor-funded AI connection. Live model and public simulator verification pending.**
 
+## Contact label and viewport fit, 18 September
+
+- Renamed Profile to Contact in the public notch and shared app header; the
+  portfolio destination remains https://rithish.vercel.app/.
+- Centered the video panel and limited its width using the recording's actual
+  aspect ratio and 72% of the viewport height, preserving uncropped content.
+- Published to the existing production alias (READY deployment
+  https://worldforge-fs7uqkvbx-rithishrs007projects.vercel.app). Browser measured
+  a 518px player in a 720px viewport and confirmed the Contact destination.
+  JavaScript syntax and git diff whitespace checks passed.
+
 ## Published recording and analytics, 18 September
 
 - Embedded the user-supplied Vercel Blob recording (SampleRec.mp4), 2558 x 1496,

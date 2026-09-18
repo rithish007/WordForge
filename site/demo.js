@@ -8,6 +8,9 @@ if (typeof demoUrl === "string" && demoUrl.trim()) {
     }
     const video = document.getElementById("demo-video");
     video.addEventListener("loadedmetadata", () => {
+      if (video.videoWidth && video.videoHeight) {
+        document.getElementById("demo-panel").style.setProperty("--video-ratio", String(video.videoWidth / video.videoHeight));
+      }
       document.getElementById("demo-placeholder").hidden = true;
       document.getElementById("video-note").hidden = false;
       video.hidden = false;
